@@ -1,0 +1,811 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billionaire Systems Co. | Business Growth &amp; Consulting</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:        #ffffff;
+      --off-white:    #f4f7f4;
+      --dark-green:   #0a2318;
+      --mid-green:    #1a3d2b;
+      --rich-green:   #245c3f;
+      --light-green:  #2e7d52;
+      --accent:       #3da870;
+      --gold:         #c9a84c;
+      --text:         #0d0d0d;
+      --muted:        #556055;
+      --border:       #d0ddd0;
+      --sh:           0 4px 24px rgba(10,35,24,0.10);
+      --sh-lg:        0 16px 48px rgba(10,35,24,0.16);
+      --r:            10px;
+      --rl:           16px;
+      --t:            0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: var(--r);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: .93rem;
+      cursor: pointer; border: 2px solid transparent;
+      transition: background var(--t), color var(--t), border-color var(--t), transform var(--t), box-shadow var(--t);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn-green { background: var(--light-green); color: var(--white); border-color: var(--light-green); }
+    .btn-green:hover { background: var(--rich-green); border-color: var(--rich-green); box-shadow: 0 6px 24px rgba(46,125,82,.35); }
+    .btn-white { background: var(--white); color: var(--dark-green); border-color: var(--white); }
+    .btn-white:hover { background: var(--off-white); }
+    .btn-outline-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,.55); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.10); border-color: var(--white); }
+    .btn-outline-green { background: transparent; color: var(--light-green); border-color: var(--light-green); }
+    .btn-outline-green:hover { background: var(--light-green); color: var(--white); }
+    .btn-sm { padding: 10px 22px; font-size: .84rem; }
+    .btn-lg { padding: 17px 40px; font-size: 1rem; }
+
+    /* SECTION */
+    .section { padding: 96px 0; }
+    .section-alt { background: var(--off-white); }
+    .section-dark { background: var(--dark-green); }
+    .text-center { text-align: center; }
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .76rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+    }
+    .sec-label-lt { color: rgba(255,255,255,.5); }
+    .sec-title { font-size: clamp(1.9rem,4vw,2.9rem); color: var(--dark-green); margin-bottom: 14px; }
+    .sec-title-lt { color: var(--white); }
+    .sec-sub { font-size: 1rem; color: var(--muted); max-width: 600px; }
+    .green-line { width: 46px; height: 3px; background: var(--light-green); border-radius: 2px; margin-bottom: 18px; }
+    .green-line-c { margin: 0 auto 18px; }
+
+    /* NAVBAR */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--dark-green); transition: box-shadow var(--t);
+    }
+    #navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.22); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 20px; }
+    .nav-logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; text-decoration: none; }
+    .logo-badge { width: 38px; height: 38px; background: var(--gold); color: var(--dark-green); font-family: 'Playfair Display', serif; font-size: .95rem; font-weight: 900; border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; letter-spacing: -1px; user-select: none; }
+    .logo-wordmark { display: flex; flex-direction: column; line-height: 1; gap: 4px; }
+    .logo-line1 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--white); letter-spacing: .01em; }
+    .logo-line2 { font-family: 'Inter', sans-serif; font-size: .56rem; font-weight: 700; color: var(--gold); letter-spacing: .24em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 2px; list-style: none; flex: 1; justify-content: center; }
+    .nav-links a {
+      color: rgba(255,255,255,.75); font-size: .87rem; font-weight: 500;
+      padding: 7px 13px; border-radius: 6px; transition: background var(--t), color var(--t);
+    }
+    .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.10); color: var(--white); }
+    .nav-book { flex-shrink: 0; }
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; border: none; background: transparent; flex-shrink: 0;
+    }
+    .nav-toggle span { display: block; width: 23px; height: 2px; background: var(--white); border-radius: 2px; transition: transform var(--t), opacity var(--t); }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* FLOATING WA */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 56px; height: 56px; border-radius: 50%; background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.45); transition: transform var(--t), box-shadow var(--t);
+    }
+    .wa-float:hover { transform: scale(1.08); box-shadow: 0 8px 28px rgba(37,211,102,.55); }
+    .wa-float svg { width: 28px; height: 28px; }
+
+    /* HERO */
+    #home {
+      min-height: 100vh; background: var(--dark-green);
+      display: flex; align-items: center; padding-top: 66px;
+      position: relative; overflow: hidden;
+    }
+    #home::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 30%, rgba(46,125,82,.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 5% 85%, rgba(10,35,24,.9) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: center; position: relative; z-index: 1; padding: 64px 0; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      padding: 7px 16px; border-radius: 40px;
+      font-size: .77rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 22px;
+    }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; animation: pdot 2s infinite; }
+    @keyframes pdot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+    .hero-title { font-size: clamp(2.4rem,5.5vw,4rem); color: var(--white); margin-bottom: 10px; font-weight: 700; }
+    .hero-title .hl { color: var(--gold); }
+    .hero-stmt {
+      font-size: 1.05rem; color: rgba(255,255,255,.65);
+      margin-bottom: 36px; max-width: 520px; font-style: italic;
+      border-left: 3px solid var(--light-green); padding-left: 16px; line-height: 1.6;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Brand graphic */
+    .hero-visual { display: flex; align-items: center; justify-content: center; }
+    .brand-graphic { position: relative; width: 360px; height: 360px; }
+    .bg-c { position: absolute; border-radius: 50%; }
+    .bg-c1 { width: 360px; height: 360px; background: radial-gradient(circle, rgba(46,125,82,.18) 0%, transparent 70%); top:0; left:0; }
+    .bg-c2 { width: 270px; height: 270px; border: 1px solid rgba(201,168,76,.18); top: 45px; left: 45px; animation: spin 30s linear infinite; }
+    .bg-c3 { width: 170px; height: 170px; border: 2px solid rgba(46,125,82,.30); top: 95px; left: 95px; animation: spin 20s linear infinite reverse; }
+    @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+    .brand-center { position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:2; }
+    .brand-mono { font-family:'Playfair Display',serif; font-size:4.2rem; font-weight:900; color:var(--white); line-height:1; text-shadow:0 0 60px rgba(46,125,82,.5); }
+    .brand-mono span { color:var(--gold); }
+    .brand-sub { font-size:.7rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.45); margin-top:7px; }
+    .fc { position:absolute; background:rgba(255,255,255,.06); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:11px 15px; text-align:center; z-index:3; }
+    .fc-val { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:var(--gold); }
+    .fc-lbl { font-size:.66rem; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.7px; }
+    .fc-a { top:18px; right:-8px; }
+    .fc-b { bottom:28px; left:-8px; }
+    .fc-c { bottom:95px; right:-18px; }
+
+    /* PROOF STRIP */
+    #proof { background: var(--mid-green); padding: 26px 0; }
+    .proof-wrap { display:flex; align-items:stretch; flex-wrap:wrap; }
+    .proof-item { flex:1; min-width:200px; display:flex; align-items:flex-start; gap:13px; padding:18px 24px; border-right:1px solid rgba(255,255,255,.10); }
+    .proof-item:last-child { border-right:none; }
+    .proof-ico { font-size:1.5rem; flex-shrink:0; margin-top:2px; }
+    .proof-val { font-family:'Playfair Display',serif; font-size:1.45rem; font-weight:700; color:var(--white); line-height:1; }
+    .proof-lbl { font-size:.82rem; color:rgba(255,255,255,.68); margin-top:4px; line-height:1.4; }
+    .proof-quote {
+      background:var(--rich-green); padding:22px 32px;
+      font-size:.91rem; color:rgba(255,255,255,.72); font-style:italic;
+      display:flex; align-items:center; border-top:1px solid rgba(255,255,255,.08); width:100%; gap:12px;
+    }
+    .proof-quote::before { content:'"'; font-family:'Playfair Display',serif; font-size:2.6rem; color:var(--gold); line-height:1; flex-shrink:0; }
+
+    /* SERVICES */
+    #services { padding: 96px 0; }
+    .services-intro { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:end; margin-bottom:56px; }
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:26px; }
+    .svc-card {
+      background:var(--white); border:1px solid var(--border); border-radius:var(--rl);
+      padding:34px 28px; box-shadow:var(--sh); display:flex; flex-direction:column;
+      transition:transform var(--t), box-shadow var(--t), border-color var(--t); position:relative; overflow:hidden;
+    }
+    .svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--light-green),var(--accent)); opacity:0; transition:opacity var(--t); }
+    .svc-card:hover { transform:translateY(-5px); box-shadow:var(--sh-lg); border-color:rgba(46,125,82,.25); }
+    .svc-card:hover::before { opacity:1; }
+    .svc-ico { width:58px; height:58px; border-radius:13px; background:linear-gradient(135deg,var(--mid-green) 0%,var(--light-green) 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin-bottom:18px; flex-shrink:0; }
+    .svc-title { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--dark-green); margin-bottom:9px; }
+    .svc-desc { font-size:.9rem; color:var(--muted); margin-bottom:26px; flex:1; line-height:1.65; }
+
+    /* ABOUT */
+    #about { padding:96px 0; background:var(--off-white); }
+    .about-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:68px; align-items:center; }
+    .about-vis { position:relative; }
+    .about-brand-box {
+      background:linear-gradient(145deg,var(--dark-green) 0%,var(--rich-green) 100%);
+      border-radius:20px; padding:46px 38px; text-align:center;
+      box-shadow:var(--sh-lg); position:relative; overflow:hidden;
+    }
+    .about-brand-box::after { content:''; position:absolute; bottom:-40px; right:-40px; width:180px; height:180px; border-radius:50%; border:36px solid rgba(255,255,255,.04); }
+    .big-letter { font-family:'Playfair Display',serif; font-size:8rem; font-weight:900; color:rgba(255,255,255,.05); line-height:1; position:absolute; top:-8px; right:16px; }
+    .about-logo { display:flex; align-items:center; gap:14px; margin-bottom:14px; position:relative; z-index:1; }
+    .about-logo .logo-badge { width:52px; height:52px; font-size:1.25rem; border-radius:7px; }
+    .about-logo .logo-line1 { font-size:1.45rem; }
+    .about-logo .logo-line2 { font-size:.68rem; letter-spacing:.26em; }
+    .about-tagline { font-size:.8rem; color:rgba(255,255,255,.5); font-style:italic; margin-bottom:30px; position:relative; z-index:1; }
+    .about-list { list-style:none; text-align:left; position:relative; z-index:1; }
+    .about-list li { display:flex; align-items:center; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07); font-size:.88rem; color:rgba(255,255,255,.78); }
+    .about-list li:last-child { border-bottom:none; }
+    .chk { width:20px; height:20px; border-radius:50%; background:var(--light-green); display:flex; align-items:center; justify-content:center; font-size:.66rem; color:var(--white); flex-shrink:0; }
+    .about-badge { position:absolute; bottom:-18px; left:-18px; background:var(--gold); color:var(--dark-green); border-radius:12px; padding:14px 18px; box-shadow:0 8px 24px rgba(201,168,76,.35); text-align:center; }
+    .ab-num { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; line-height:1; }
+    .ab-txt { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; }
+    .about-head { font-size:clamp(1.75rem,3.5vw,2.45rem); color:var(--dark-green); margin-bottom:16px; }
+    .about-p { font-size:.95rem; color:var(--muted); margin-bottom:14px; line-height:1.75; }
+    .mission { background:var(--dark-green); color:var(--white); border-radius:var(--r); padding:20px 22px; margin:22px 0 26px; border-left:4px solid var(--light-green); }
+    .mission h4 { font-size:.8rem; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:7px; }
+    .mission p { font-size:.93rem; color:rgba(255,255,255,.80); }
+    .pillars { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:22px; }
+    .pillar { background:rgba(46,125,82,.08); border:1px solid rgba(46,125,82,.17); border-radius:8px; padding:13px 14px; display:flex; gap:9px; align-items:flex-start; }
+    .p-ico { font-size:1.1rem; flex-shrink:0; }
+    .p-name { font-size:.84rem; font-weight:600; color:var(--dark-green); }
+    .p-desc { font-size:.77rem; color:var(--muted); margin-top:2px; }
+
+    /* MEDIA / BOOK */
+    #media { padding:96px 0; background:var(--dark-green); position:relative; overflow:hidden; }
+    #media::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 70% at 100% 50%,rgba(46,125,82,.17) 0%,transparent 60%); pointer-events:none; }
+    .media-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; position:relative; z-index:1; }
+    .book-wrap { display:flex; justify-content:center; align-items:center; }
+    .book-mock {
+      width:210px; height:290px; border-radius:4px 13px 13px 4px;
+      background:linear-gradient(145deg,#1a3d2b 0%,#0a2318 100%);
+      box-shadow:-6px 6px 0 rgba(0,0,0,.25), 0 20px 60px rgba(0,0,0,.40), inset -4px 0 8px rgba(0,0,0,.30);
+      position:relative; display:flex; flex-direction:column; justify-content:space-between;
+      padding:26px 22px; border:1px solid rgba(201,168,76,.22); overflow:hidden;
+    }
+    .book-mock::before { content:''; position:absolute; left:0; top:0; bottom:0; width:18px; background:linear-gradient(90deg,rgba(0,0,0,.4),rgba(0,0,0,.05)); border-radius:4px 0 0 4px; }
+    .book-spine { position:absolute; top:0; left:18px; bottom:0; width:1px; background:rgba(201,168,76,.18); }
+    .book-top { position:relative; z-index:1; }
+    .book-soon { font-size:.6rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:13px; }
+    .book-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:var(--white); line-height:1.15; }
+    .book-title span { color:var(--gold); display:block; }
+    .book-div { width:100%; height:1px; background:linear-gradient(90deg,var(--gold),transparent); margin:16px 0; position:relative; z-index:1; }
+    .book-author { position:relative; z-index:1; font-size:.76rem; color:rgba(255,255,255,.55); text-transform:uppercase; letter-spacing:1.5px; }
+    .book-author strong { display:block; color:var(--white); font-size:.86rem; letter-spacing:.5px; text-transform:none; }
+    .book-bg { position:absolute; bottom:0; right:-8px; font-family:'Playfair Display',serif; font-size:4.5rem; font-weight:900; color:rgba(255,255,255,.04); line-height:1; z-index:0; }
+    .media-desc { font-size:.94rem; color:rgba(255,255,255,.68); margin:18px 0 30px; line-height:1.75; }
+    .social-h { font-size:.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.38); margin-bottom:12px; margin-top:36px; }
+    .social-list { display:flex; flex-direction:column; gap:11px; }
+    .social-link {
+      display:flex; align-items:center; gap:13px;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.10); border-radius:10px; padding:11px 16px;
+      transition:background var(--t),border-color var(--t),transform var(--t); color:var(--white);
+    }
+    .social-link:hover { background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.20); transform:translateX(4px); }
+    .social-ico { width:34px; height:34px; border-radius:7px; background:var(--light-green); display:flex; align-items:center; justify-content:center; font-size:.95rem; flex-shrink:0; }
+    .social-handle { font-weight:600; font-size:.9rem; }
+    .social-sub { font-size:.76rem; color:rgba(255,255,255,.43); }
+
+    /* CONTACT */
+    #contact { padding:96px 0; }
+    .contact-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:54px; align-items:start; }
+    .contact-h3 { font-size:1.55rem; color:var(--dark-green); margin-bottom:12px; }
+    .contact-sub { font-size:.93rem; color:var(--muted); margin-bottom:30px; line-height:1.7; }
+    .c-detail { display:flex; align-items:flex-start; gap:13px; margin-bottom:18px; }
+    .c-ico { width:42px; height:42px; border-radius:10px; background:linear-gradient(135deg,var(--mid-green),var(--light-green)); display:flex; align-items:center; justify-content:center; font-size:.95rem; flex-shrink:0; }
+    .c-detail strong { display:block; font-size:.8rem; text-transform:uppercase; letter-spacing:.6px; color:var(--dark-green); margin-bottom:2px; }
+    .c-detail span, .c-detail a { font-size:.9rem; color:var(--muted); transition:color var(--t); }
+    .c-detail a:hover { color:var(--light-green); }
+    .wa-btn {
+      display:flex; align-items:center; gap:11px; background:#25D366; color:var(--white);
+      padding:13px 22px; border-radius:var(--r); font-weight:600; font-size:.9rem;
+      margin-top:26px; transition:background var(--t),transform var(--t),box-shadow var(--t); width:fit-content;
+    }
+    .wa-btn:hover { background:#1fba5a; transform:translateY(-2px); box-shadow:0 6px 20px rgba(37,211,102,.35); }
+    .wa-btn svg { width:20px; height:20px; flex-shrink:0; }
+    .form-box { background:var(--white); border:1px solid var(--border); border-radius:var(--rl); padding:42px 38px; box-shadow:var(--sh); }
+    .form-h { font-size:1.45rem; color:var(--dark-green); margin-bottom:5px; }
+    .form-sub { font-size:.86rem; color:var(--muted); margin-bottom:28px; }
+    .f-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .f-group { margin-bottom:18px; }
+    .f-group label { display:block; font-size:.8rem; font-weight:600; color:var(--dark-green); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px; }
+    .f-group input, .f-group select, .f-group textarea {
+      width:100%; padding:11px 15px; border:1.5px solid var(--border); border-radius:8px;
+      font-family:'Inter',sans-serif; font-size:.91rem; color:var(--text);
+      background:var(--white); outline:none; appearance:none;
+      transition:border-color var(--t),box-shadow var(--t);
+    }
+    .f-group input:focus, .f-group select:focus, .f-group textarea:focus { border-color:var(--light-green); box-shadow:0 0 0 3px rgba(46,125,82,.12); }
+    .f-group textarea { resize:vertical; min-height:108px; }
+    .f-submit { width:100%; justify-content:center; }
+
+    /* FOOTER */
+    footer { background:var(--dark-green); padding:58px 0 26px; }
+    .footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:44px; padding-bottom:38px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:24px; }
+    .f-brand-name { display:flex; align-items:center; gap:11px; margin-bottom:14px; }
+    .f-brand-desc { font-size:.84rem; color:rgba(255,255,255,.48); margin-bottom:20px; line-height:1.7; }
+    .f-col h4 { font-size:.76rem; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:rgba(255,255,255,.38); margin-bottom:14px; }
+    .f-col ul { list-style:none; }
+    .f-col ul li { margin-bottom:9px; }
+    .f-col ul li a { font-size:.86rem; color:rgba(255,255,255,.58); transition:color var(--t); }
+    .f-col ul li a:hover { color:var(--accent); }
+    .footer-bottom { text-align:center; font-size:.8rem; color:rgba(255,255,255,.28); }
+    .footer-bottom span { color:var(--gold); }
+
+    /* TOAST */
+    #toast {
+      position:fixed; bottom:96px; right:26px; z-index:9999;
+      background:var(--mid-green); color:var(--white);
+      padding:13px 22px; border-radius:10px; border-left:4px solid var(--accent);
+      font-size:.86rem; font-weight:500; box-shadow:var(--sh-lg);
+      transform:translateY(30px); opacity:0; transition:transform .4s ease,opacity .4s ease;
+      pointer-events:none; max-width:310px;
+    }
+    #toast.show { transform:translateY(0); opacity:1; }
+
+    /* RESPONSIVE */
+    @media (max-width:960px) {
+      .hero-grid { grid-template-columns:1fr; text-align:center; }
+      .hero-stmt { margin:0 auto 36px; }
+      .hero-cta { justify-content:center; }
+      .hero-visual { display:none; }
+      .services-intro { grid-template-columns:1fr; gap:20px; }
+      .about-grid { grid-template-columns:1fr; gap:46px; }
+      .about-vis { max-width:400px; margin:0 auto; }
+      .media-grid { grid-template-columns:1fr; gap:44px; }
+      .book-wrap { justify-content:flex-start; }
+      .contact-grid { grid-template-columns:1fr; gap:40px; }
+    }
+    @media (max-width:768px) {
+      .nav-links {
+        display:none; flex-direction:column;
+        position:absolute; top:66px; left:0; right:0;
+        background:var(--dark-green); padding:14px 18px 22px;
+        border-top:1px solid rgba(255,255,255,.08); gap:2px;
+      }
+      .nav-links.open { display:flex; }
+      .nav-links a { padding:9px 13px; border-radius:7px; }
+      .nav-toggle { display:flex; }
+      .nav-book .btn-sm { padding:8px 14px; font-size:.79rem; }
+      .section { padding:68px 0; }
+      .proof-item { min-width:160px; }
+      .footer-grid { grid-template-columns:1fr 1fr; }
+      .f-row { grid-template-columns:1fr; }
+      .form-box { padding:30px 22px; }
+    }
+    @media (max-width:540px) {
+      .footer-grid { grid-template-columns:1fr; }
+      .pillars { grid-template-columns:1fr; }
+      .services-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/2349017785227" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 3C9.37 3 4 8.37 4 15c0 2.38.67 4.62 1.83 6.52L4 29l7.71-1.81A12.93 12.93 0 0016 28c6.63 0 12-5.37 12-12S22.63 3 16 3z" fill="white"/>
+      <path d="M21.5 18.5c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.19 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z" fill="#25D366"/>
+    </svg>
+  </a>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="nav-logo"><div class="logo-badge">BS</div><div class="logo-wordmark"><span class="logo-line1">Billionaire</span><span class="logo-line2">Systems Co.</span></div></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#media">Book &amp; Media</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-book">
+        <a href="#contact" class="btn btn-green btn-sm">Book a Consultation</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">
+            <span class="eyebrow-dot"></span>
+            Business Growth &amp; Systems Consulting
+          </div>
+          <h1 class="hero-title">
+            Your Business Should Be<br>Making <span class="hl">More Money.</span>
+          </h1>
+          <p class="hero-stmt">
+            Building systems that create wealth, scale businesses, and shape future billionaires.
+          </p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-green btn-lg">Book a Free Consultation</a>
+            <a href="#services" class="btn btn-outline-white btn-lg">Explore Services</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="brand-graphic">
+            <div class="bg-c bg-c1"></div>
+            <div class="bg-c bg-c2"></div>
+            <div class="bg-c bg-c3"></div>
+            <div class="brand-center">
+              <div class="brand-mono">B<span>S</span></div>
+              <div class="brand-sub">Billionaire Systems Co.</div>
+            </div>
+            <div class="fc fc-a"><div class="fc-val">3X</div><div class="fc-lbl">Growth Potential</div></div>
+            <div class="fc fc-b"><div class="fc-val">24/7</div><div class="fc-lbl">Automated Systems</div></div>
+            <div class="fc fc-c"><div class="fc-val">&#8734;</div><div class="fc-lbl">Possibilities</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF STRIP -->
+  <div id="proof">
+    <div class="container">
+      <div class="proof-wrap">
+        <div class="proof-item">
+          <div class="proof-ico">&#9889;</div>
+          <div><div class="proof-val">24/7</div><div class="proof-lbl">Automated business systems</div></div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-ico">&#128200;</div>
+          <div><div class="proof-val">3X</div><div class="proof-lbl">Better brand positioning potential</div></div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-ico">&#127919;</div>
+          <div><div class="proof-val">100%</div><div class="proof-lbl">Focused on scalable growth</div></div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-ico">&#9854;</div>
+          <div><div class="proof-val">&#8734;</div><div class="proof-lbl">Growth-minded possibilities</div></div>
+        </div>
+      </div>
+      <div class="proof-quote">
+        Built with the mindset of scale, structure, and long-term wealth creation. We help businesses move from survival mode to scalable systems.
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="services-intro">
+        <div>
+          <span class="sec-label">&#9670; What We Do</span>
+          <div class="green-line"></div>
+          <h2 class="sec-title">Solutions That Drive Revenue &amp; Growth</h2>
+        </div>
+        <div>
+          <p class="sec-sub">Every service is engineered to fix a specific problem in your business &#8212; so you make more money, serve better, and scale without breaking.</p>
+          <a href="#contact" class="btn btn-green" style="margin-top:22px">Book a Free Consultation</a>
+        </div>
+      </div>
+      <div class="services-grid">
+
+        <div class="svc-card">
+          <div class="svc-ico">&#128200;</div>
+          <h3 class="svc-title">Revenue Growth Strategy</h3>
+          <p class="svc-desc">Scale smarter with data-driven strategies designed to increase profit, customer retention, and long-term business growth.</p>
+          <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Revenue Growth Strategy')">Book a Growth Session &#8594;</a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-ico">&#9881;&#65039;</div>
+          <h3 class="svc-title">SME Tooling &amp; Systems</h3>
+          <p class="svc-desc">Streamline your business with smart tools, automation, and systems that improve efficiency and reduce manual work.</p>
+          <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('SME Tooling & Systems')">Optimize My Business &#8594;</a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-ico">&#127959;&#65039;</div>
+          <h3 class="svc-title">Business Structure &amp; Operational Improvement</h3>
+          <p class="svc-desc">Build a stronger foundation with better workflows, clearer processes, and scalable operational systems.</p>
+          <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Business Structure & Operational Improvement')">Improve Operations &#8594;</a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-ico">&#129504;</div>
+          <h3 class="svc-title">Customer Training &amp; Mindset Development</h3>
+          <p class="svc-desc">Empower your team and customers with practical training focused on growth, leadership, and business mindset transformation.</p>
+          <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Customer Training & Mindset Development')">Schedule Training &#8594;</a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-ico">&#128241;</div>
+          <h3 class="svc-title">Online Content &amp; Social Media Strategy</h3>
+          <p class="svc-desc">Create content that attracts attention, builds authority, and converts audiences into loyal customers.</p>
+          <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Online Content & Social Media Strategy')">Build My Brand &#8594;</a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-ico">&#129302;</div>
+          <h3 class="svc-title">Business AI Integration</h3>
+          <p class="svc-desc">Leverage AI tools and automation to improve productivity, decision-making, and business performance.</p>
+          <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Business AI Integration')">Integrate AI Solutions &#8594;</a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-ico">&#127908;</div>
+          <h3 class="svc-title">Speaking Engagements</h3>
+          <p class="svc-desc">Inspiring conversations on business growth, innovation, leadership, systems, and the future of entrepreneurship.</p>
+          <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Speaking Engagement')">Book a Speaking Engagement &#8594;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section section-alt">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-vis">
+          <div class="about-brand-box">
+            <div class="big-letter">B</div>
+            <div class="about-logo"><div class="logo-badge">BS</div><div class="logo-wordmark"><span class="logo-line1">Billionaire</span><span class="logo-line2">Systems Co.</span></div></div>
+            <div class="about-tagline">Building wealth through systems &amp; strategy</div>
+            <ul class="about-list">
+              <li><span class="chk">&#10003;</span> Systems-driven growth</li>
+              <li><span class="chk">&#10003;</span> Revenue-focused strategy</li>
+              <li><span class="chk">&#10003;</span> Scalable business structures</li>
+              <li><span class="chk">&#10003;</span> Mindset &amp; leadership development</li>
+              <li><span class="chk">&#10003;</span> Results, not just advice</li>
+            </ul>
+          </div>
+          <div class="about-badge">
+            <div class="ab-num">SME</div>
+            <div class="ab-txt">Growth Partner</div>
+          </div>
+        </div>
+        <div>
+          <span class="sec-label">&#9670; About Us</span>
+          <h2 class="about-head">We Solve the Problem of<br>Making More Money.</h2>
+          <p class="about-p">Billionaire Systems Co. exists for one reason &#8212; to help business owners, SME operators, and entrepreneurs in Nigeria, Africa, and beyond break through the ceiling of average revenue and build businesses that truly perform.</p>
+          <p class="about-p">We help you improve the details in systems and structures that drive visibility, customer retention, and sales &#8212; so your business works harder for you, not the other way around.</p>
+          <div class="mission">
+            <h4>Our Mission</h4>
+            <p>To turn every ambitious business owner into a systems-driven entrepreneur who makes more money, serves more people, and builds lasting wealth.</p>
+          </div>
+          <div class="pillars">
+            <div class="pillar"><div class="p-ico">&#128295;</div><div><div class="p-name">Systems</div><div class="p-desc">Automated, scalable infrastructure</div></div></div>
+            <div class="pillar"><div class="p-ico">&#9820;</div><div><div class="p-name">Strategy</div><div class="p-desc">Data-driven, revenue-focused</div></div></div>
+            <div class="pillar"><div class="p-ico">&#128200;</div><div><div class="p-name">Results</div><div class="p-desc">Measurable growth, real outcomes</div></div></div>
+            <div class="pillar"><div class="p-ico">&#129517;</div><div><div class="p-name">Clarity</div><div class="p-desc">Clear direction &amp; execution</div></div></div>
+          </div>
+          <div style="margin-top:32px">
+            <a href="#contact" class="btn btn-green">Book a Free Consultation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK & MEDIA -->
+  <section id="media" class="section section-dark">
+    <div class="container">
+      <div class="media-grid">
+        <div class="book-wrap">
+          <div class="book-mock">
+            <div class="book-spine"></div>
+            <div class="book-top">
+              <div class="book-soon">Coming Soon</div>
+              <div class="book-title">The Gift of<span>A Mindset</span></div>
+              <div class="book-div"></div>
+            </div>
+            <div class="book-author">By<strong>Ben &#183; Billionaire Systems Co.</strong></div>
+            <div class="book-bg">BS</div>
+          </div>
+        </div>
+        <div>
+          <span class="sec-label sec-label-lt">&#9670; Book &amp; Media</span>
+          <div class="green-line"></div>
+          <h2 class="sec-title sec-title-lt">The Gift of a Mindset</h2>
+          <p class="sec-sub" style="color:rgba(255,255,255,.55)">Upcoming Book</p>
+          <p class="media-desc">A transformative read for entrepreneurs and business leaders who are ready to rewire their thinking, unlock their potential, and build businesses that last. <em>The Gift of a Mindset</em> is more than a book &#8212; it&#39;s a blueprint for thinking like a builder of wealth.</p>
+          <a href="#contact" class="btn btn-green" onclick="preselectService('Book Pre-order / Notification')">Get Notified at Launch &#8594;</a>
+          <div>
+            <div class="social-h">Follow the Conversation</div>
+            <div class="social-list">
+              <a href="https://instagram.com/benthebillionaire" class="social-link" target="_blank" rel="noopener noreferrer">
+                <div class="social-ico">&#128247;</div>
+                <div><div class="social-handle">@benthebillionaire</div><div class="social-sub">Business &middot; Growth &middot; Mindset</div></div>
+              </a>
+              <a href="https://instagram.com/therealtalk100" class="social-link" target="_blank" rel="noopener noreferrer">
+                <div class="social-ico">&#127897;&#65039;</div>
+                <div><div class="social-handle">@therealtalk100</div><div class="social-sub">Real conversations on business &amp; life</div></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:56px">
+        <span class="sec-label" style="justify-content:center">&#9670; Book a Consultation</span>
+        <div class="green-line green-line-c"></div>
+        <h2 class="sec-title">Ready to Make More Money?<br>Let&#39;s Talk.</h2>
+        <p class="sec-sub" style="margin:0 auto">Tell us about your business and the challenge you&#39;re facing. We&#39;ll reach out and build a plan together.</p>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <h3 class="contact-h3">Get in Touch</h3>
+          <p class="contact-sub">We work with SME owners, entrepreneurs, and anyone ready to stop guessing and start growing. Reach out &#8212; we&#39;re here for you.</p>
+          <div class="c-detail">
+            <div class="c-ico">&#9993;&#65039;</div>
+            <div><strong>Email</strong><a href="mailto:Benthebillionaireob@gmail.com">Benthebillionaireob@gmail.com</a></div>
+          </div>
+          <div class="c-detail">
+            <div class="c-ico">&#128222;</div>
+            <div><strong>Phone / WhatsApp</strong><a href="tel:+2349017785227">+234 901 778 5227</a></div>
+          </div>
+          <div class="c-detail">
+            <div class="c-ico">&#127758;</div>
+            <div><strong>Serving</strong><span>Nigeria, Africa &amp; Beyond</span></div>
+          </div>
+          <a href="https://wa.me/2349017785227" class="wa-btn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 3C9.37 3 4 8.37 4 15c0 2.38.67 4.62 1.83 6.52L4 29l7.71-1.81A12.93 12.93 0 0016 28c6.63 0 12-5.37 12-12S22.63 3 16 3z" fill="white" fill-opacity=".9"/>
+              <path d="M21.5 18.5c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.19 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z" fill="#25D366"/>
+            </svg>
+            Chat on WhatsApp Now
+          </a>
+        </div>
+        <div class="form-box">
+          <h3 class="form-h">Book a Free Consultation</h3>
+          <p class="form-sub">Fill in your details and we&#39;ll be in touch within 24 hours.</p>
+          <form id="consultForm" novalidate>
+            <div class="f-row">
+              <div class="f-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
+              </div>
+              <div class="f-group">
+                <label for="phone">Phone / WhatsApp *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+234 ..." required />
+              </div>
+            </div>
+            <div class="f-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="f-group">
+              <label for="service">Service You&#39;re Interested In *</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service...</option>
+                <option value="Revenue Growth Strategy">Revenue Growth Strategy</option>
+                <option value="SME Tooling & Systems">SME Tooling &amp; Systems</option>
+                <option value="Business Structure & Operational Improvement">Business Structure &amp; Operational Improvement</option>
+                <option value="Customer Training & Mindset Development">Customer Training &amp; Mindset Development</option>
+                <option value="Online Content & Social Media Strategy">Online Content &amp; Social Media Strategy</option>
+                <option value="Business AI Integration">Business AI Integration</option>
+                <option value="Speaking Engagement">Speaking Engagement</option>
+                <option value="Book Pre-order / Notification">Book Pre-order / Notification</option>
+                <option value="General Inquiry">General Inquiry</option>
+              </select>
+            </div>
+            <div class="f-group">
+              <label for="message">Your Biggest Business Challenge *</label>
+              <textarea id="message" name="message" placeholder="Describe your business and the problem you want to solve..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-green btn-lg f-submit">Send Message &amp; Book Consultation &#8594;</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="f-brand-name"><div class="logo-badge">BS</div><div class="logo-wordmark"><span class="logo-line1">Billionaire</span><span class="logo-line2">Systems Co.</span></div></div>
+          <p class="f-brand-desc">Building systems that create wealth, scale businesses, and shape future billionaires. Serving Nigeria, Africa, and beyond.</p>
+          <a href="#contact" class="btn btn-green btn-sm">Book a Consultation</a>
+        </div>
+        <div class="f-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#media">Book &amp; Media</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://instagram.com/benthebillionaire" target="_blank" rel="noopener noreferrer">@benthebillionaire</a></li>
+            <li><a href="https://instagram.com/therealtalk100" target="_blank" rel="noopener noreferrer">@therealtalk100</a></li>
+            <li><a href="mailto:Benthebillionaireob@gmail.com">Send an Email</a></li>
+            <li><a href="https://wa.me/2349017785227" target="_blank" rel="noopener noreferrer">WhatsApp Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span>Billionaire Systems Co.</span> &#183; All rights reserved. Built for scale.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="config.js"></script>
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinksEl = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinksEl.classList.toggle('open');
+      navToggle.classList.toggle('open');
+    });
+    document.querySelectorAll('#navLinks a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksEl.classList.remove('open');
+        navToggle.classList.remove('open');
+      });
+    });
+
+    const sections = document.querySelectorAll('section[id], div[id="proof"]');
+    const allLinks = document.querySelectorAll('#navLinks a');
+    function setActive() {
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+      allLinks.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+      });
+    }
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+
+    function preselectService(name) {
+      setTimeout(() => {
+        const sel = document.getElementById('service');
+        if (!sel) return;
+        for (let i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].value === name) { sel.selectedIndex = i; break; }
+        }
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+
+    const EMAILJS_PUBLIC_KEY  = window.EMAILJS_CONFIG.PUBLIC_KEY;
+    const EMAILJS_SERVICE_ID  = window.EMAILJS_CONFIG.SERVICE_ID;
+    const EMAILJS_TEMPLATE_ID = window.EMAILJS_CONFIG.TEMPLATE_ID;
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+    document.getElementById('consultForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('fullName').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      const phone    = document.getElementById('phone').value.trim();
+      const service  = document.getElementById('service').value;
+      const message  = document.getElementById('message').value.trim();
+
+      if (!fullName || !email || !phone || !service || !message) {
+        showToast('error', 'Please fill in all required fields.');
+        return;
+      }
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!re.test(email)) { showToast('error', 'Please enter a valid email address.'); return; }
+
+      const btn = this.querySelector('.f-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name: fullName, from_email: email,
+        phone, service, message, reply_to: email
+      })
+      .then(() => { showToast('ok', 'Message sent! We\'ll be in touch within 24 hours.'); this.reset(); })
+      .catch(err => { console.error(err); showToast('error', 'Something went wrong. Please WhatsApp or email us directly.'); })
+      .finally(() => { btn.disabled = false; btn.innerHTML = 'Send Message &amp; Book Consultation &#8594;'; });
+    });
+
+    function showToast(type, msg) {
+      const t = document.getElementById('toast');
+      t.textContent = (type === 'ok' ? '\u2713 ' : '\u26a0 ') + msg;
+      t.style.borderLeftColor = type === 'ok' ? 'var(--accent)' : '#e05555';
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 5000);
+    }
+  </script>
+</body>
+</html>
