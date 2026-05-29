@@ -5,7 +5,7 @@
 // ============================================================
 
 window.EMAILJS_CONFIG = {
-  PUBLIC_KEY:  'hZ9TaWr0G9vfym0wR',   // Account → API Keys
+  PUBLIC_KEY:  'DcLERxDzbhRU9jiS9',   // Account → API Keys
   SERVICE_ID:  'service_iw7ku0f',   // Email Services → your service
-  TEMPLATE_ID: 'template_qkx9h95',  // Email Templates → your template
+  TEMPLATE_ID: 'template_amh7bzz',  // Email Templates → your template
 };
