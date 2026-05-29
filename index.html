@@ -310,6 +310,21 @@
     .footer-bottom { text-align:center; font-size:.8rem; color:rgba(255,255,255,.28); }
     .footer-bottom span { color:var(--gold); }
 
+    /* SCROLL REVEAL */
+    [data-reveal] {
+      transition: opacity .7s cubic-bezier(.25,.8,.25,1), transform .7s cubic-bezier(.25,.8,.25,1);
+      will-change: opacity, transform;
+    }
+    [data-reveal='up']    { opacity:0; transform: translateY(70px) scale(.96); }
+    [data-reveal='left']  { opacity:0; transform: translateX(-80px); }
+    [data-reveal='right'] { opacity:0; transform: translateX(80px); }
+    [data-reveal='pop']   { opacity:0; transform: scale(.82) translateY(30px); }
+
+    [data-reveal].revealed {
+      opacity: 1 !important;
+      transform: translateY(0) translateX(0) scale(1) !important;
+    }
+
     /* TOAST */
     #toast {
       position:fixed; bottom:96px; right:26px; z-index:9999;
@@ -392,7 +407,7 @@
   <section id="home">
     <div class="container">
       <div class="hero-grid">
-        <div>
+        <div data-reveal="left">
           <div class="hero-eyebrow">
             <span class="eyebrow-dot"></span>
             Business Growth &amp; Systems Consulting
@@ -408,7 +423,7 @@
             <a href="#services" class="btn btn-outline-white btn-lg">Explore Services</a>
           </div>
         </div>
-        <div class="hero-visual">
+        <div class="hero-visual" data-reveal="right">
           <div class="brand-graphic">
             <div class="bg-c bg-c1"></div>
             <div class="bg-c bg-c2"></div>
@@ -430,19 +445,19 @@
   <div id="proof">
     <div class="container">
       <div class="proof-wrap">
-        <div class="proof-item">
+        <div class="proof-item" data-reveal="pop" data-delay="0">
           <div class="proof-ico">&#9889;</div>
           <div><div class="proof-val">24/7</div><div class="proof-lbl">Automated business systems</div></div>
         </div>
-        <div class="proof-item">
+        <div class="proof-item" data-reveal="pop" data-delay="100">
           <div class="proof-ico">&#128200;</div>
           <div><div class="proof-val">3X</div><div class="proof-lbl">Better brand positioning potential</div></div>
         </div>
-        <div class="proof-item">
+        <div class="proof-item" data-reveal="pop" data-delay="200">
           <div class="proof-ico">&#127919;</div>
           <div><div class="proof-val">100%</div><div class="proof-lbl">Focused on scalable growth</div></div>
         </div>
-        <div class="proof-item">
+        <div class="proof-item" data-reveal="pop" data-delay="300">
           <div class="proof-ico">&#9854;</div>
           <div><div class="proof-val">&#8734;</div><div class="proof-lbl">Growth-minded possibilities</div></div>
         </div>
@@ -457,61 +472,61 @@
   <section id="services" class="section">
     <div class="container">
       <div class="services-intro">
-        <div>
+        <div data-reveal="left">
           <span class="sec-label">&#9670; What We Do</span>
           <div class="green-line"></div>
           <h2 class="sec-title">Solutions That Drive Revenue &amp; Growth</h2>
         </div>
-        <div>
+        <div data-reveal="right">
           <p class="sec-sub">Every service is engineered to fix a specific problem in your business &#8212; so you make more money, serve better, and scale without breaking.</p>
           <a href="#contact" class="btn btn-green" style="margin-top:22px">Book a Free Consultation</a>
         </div>
       </div>
       <div class="services-grid">
 
-        <div class="svc-card">
+        <div class="svc-card" data-reveal="up" data-delay="0">
           <div class="svc-ico">&#128200;</div>
           <h3 class="svc-title">Revenue Growth Strategy</h3>
           <p class="svc-desc">Scale smarter with data-driven strategies designed to increase profit, customer retention, and long-term business growth.</p>
           <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Revenue Growth Strategy')">Book a Growth Session &#8594;</a>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card" data-reveal="up" data-delay="80">
           <div class="svc-ico">&#9881;&#65039;</div>
           <h3 class="svc-title">SME Tooling &amp; Systems</h3>
           <p class="svc-desc">Streamline your business with smart tools, automation, and systems that improve efficiency and reduce manual work.</p>
           <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('SME Tooling & Systems')">Optimize My Business &#8594;</a>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card" data-reveal="up" data-delay="160">
           <div class="svc-ico">&#127959;&#65039;</div>
           <h3 class="svc-title">Business Structure &amp; Operational Improvement</h3>
           <p class="svc-desc">Build a stronger foundation with better workflows, clearer processes, and scalable operational systems.</p>
           <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Business Structure & Operational Improvement')">Improve Operations &#8594;</a>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card" data-reveal="up" data-delay="240">
           <div class="svc-ico">&#129504;</div>
           <h3 class="svc-title">Customer Training &amp; Mindset Development</h3>
           <p class="svc-desc">Empower your team and customers with practical training focused on growth, leadership, and business mindset transformation.</p>
           <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Customer Training & Mindset Development')">Schedule Training &#8594;</a>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card" data-reveal="up" data-delay="320">
           <div class="svc-ico">&#128241;</div>
           <h3 class="svc-title">Online Content &amp; Social Media Strategy</h3>
           <p class="svc-desc">Create content that attracts attention, builds authority, and converts audiences into loyal customers.</p>
           <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Online Content & Social Media Strategy')">Build My Brand &#8594;</a>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card" data-reveal="up" data-delay="400">
           <div class="svc-ico">&#129302;</div>
           <h3 class="svc-title">Business AI Integration</h3>
           <p class="svc-desc">Leverage AI tools and automation to improve productivity, decision-making, and business performance.</p>
           <a href="#contact" class="btn btn-outline-green btn-sm" onclick="preselectService('Business AI Integration')">Integrate AI Solutions &#8594;</a>
         </div>
 
-        <div class="svc-card">
+        <div class="svc-card" data-reveal="up" data-delay="480">
           <div class="svc-ico">&#127908;</div>
           <h3 class="svc-title">Speaking Engagements</h3>
           <p class="svc-desc">Inspiring conversations on business growth, innovation, leadership, systems, and the future of entrepreneurship.</p>
@@ -526,7 +541,7 @@
   <section id="about" class="section section-alt">
     <div class="container">
       <div class="about-grid">
-        <div class="about-vis">
+        <div class="about-vis" data-reveal="left">
           <div class="about-brand-box">
             <div class="big-letter">B</div>
             <div class="about-logo"><div class="logo-badge">BS</div><div class="logo-wordmark"><span class="logo-line1">Billionaire</span><span class="logo-line2">Systems Co.</span></div></div>
@@ -545,8 +560,8 @@
           </div>
         </div>
         <div>
-          <span class="sec-label">&#9670; About Us</span>
-          <h2 class="about-head">We Solve the Problem of<br>Making More Money.</h2>
+          <span class="sec-label" data-reveal="right">&#9670; About Us</span>
+          <h2 class="about-head" data-reveal="up" data-delay="100">We Solve the Problem of<br>Making More Money.</h2>
           <p class="about-p">Billionaire Systems Co. exists for one reason &#8212; to help business owners, SME operators, and entrepreneurs in Nigeria, Africa, and beyond break through the ceiling of average revenue and build businesses that truly perform.</p>
           <p class="about-p">We help you improve the details in systems and structures that drive visibility, customer retention, and sales &#8212; so your business works harder for you, not the other way around.</p>
           <div class="mission">
@@ -571,7 +586,7 @@
   <section id="media" class="section section-dark">
     <div class="container">
       <div class="media-grid">
-        <div class="book-wrap">
+        <div class="book-wrap" data-reveal="left">
           <div class="book-mock">
             <div class="book-spine"></div>
             <div class="book-top">
@@ -584,7 +599,7 @@
           </div>
         </div>
         <div>
-          <span class="sec-label sec-label-lt">&#9670; Book &amp; Media</span>
+          <span class="sec-label sec-label-lt" data-reveal="right">&#9670; Book &amp; Media</span>
           <div class="green-line"></div>
           <h2 class="sec-title sec-title-lt">The Gift of a Mindset</h2>
           <p class="sec-sub" style="color:rgba(255,255,255,.55)">Upcoming Book</p>
@@ -611,14 +626,14 @@
   <!-- CONTACT -->
   <section id="contact" class="section">
     <div class="container">
-      <div class="text-center" style="margin-bottom:56px">
+      <div class="text-center" style="margin-bottom:56px" data-reveal="up">
         <span class="sec-label" style="justify-content:center">&#9670; Book a Consultation</span>
         <div class="green-line green-line-c"></div>
         <h2 class="sec-title">Ready to Make More Money?<br>Let&#39;s Talk.</h2>
         <p class="sec-sub" style="margin:0 auto">Tell us about your business and the challenge you&#39;re facing. We&#39;ll reach out and build a plan together.</p>
       </div>
       <div class="contact-grid">
-        <div>
+        <div data-reveal="left">
           <h3 class="contact-h3">Get in Touch</h3>
           <p class="contact-sub">We work with SME owners, entrepreneurs, and anyone ready to stop guessing and start growing. Reach out &#8212; we&#39;re here for you.</p>
           <div class="c-detail">
@@ -641,7 +656,7 @@
             Chat on WhatsApp Now
           </a>
         </div>
-        <div class="form-box">
+        <div class="form-box" data-reveal="right">
           <h3 class="form-h">Book a Free Consultation</h3>
           <p class="form-sub">Fill in your details and we&#39;ll be in touch within 24 hours.</p>
           <form id="consultForm" novalidate>
@@ -806,6 +821,24 @@
       t.classList.add('show');
       setTimeout(() => t.classList.remove('show'), 5000);
     }
+
+    // ── Scroll Reveal (bidirectional — follows scroll up AND down) ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.delay || 0);
+        if (entry.isIntersecting) {
+          setTimeout(() => el.classList.add('revealed'), delay);
+        } else {
+          // Remove class so it re-animates when scrolled back into view
+          el.classList.remove('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    });
+    document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
   </script>
 </body>
 </html>
